@@ -1,0 +1,105 @@
+Part I
+
+
+##in this coding we used two 
+Random Forest Trees
+Advantages:
+•	Simple model that can achieve high performance in terms of classification;
+•	Reduces variance in trees and can decorrelate the bagged trees;
+•	Important when there are multiple features that may be correlated.
+Disadvantages:
+•	For humans, it is not as easy to visually interpret, as is a DT;
+•	In some datasets with noisy classification/regression tasks, random forest trees have been determined as being “over-fit.”
+Logistic Regression
+Advantages
+•	performs well when the dataset is linearly separable.
+•	less prone to over-fitting but it can overfit in high dimensional datasets. Should consider Regularization techniques to avoid over-fitting in these scenarios.
+•	Logistic regression is easier to implement, interpret and very efficient to train. 
+
+Disadvantages 
+
+•	the assumption of linearity between the dependent variable and the independent variables. In the real world, the data is rarely linearly separable. Most of the time data would be a jumbled mess.
+•	Logistic Regression can only be used to predict discrete functions. Therefore, the dependent variable of Logistic Regression is restricted to the discrete number set. This restriction itself is problematic, as it is prohibitive to the prediction of continuous data.
+----------------------------------------------------------------------------------------------
+To Technical Audiences
+#one limitation of the model, it is best to contain more than this number to tain the model.
+## another limitation of the model, we have to test the results with the best way for dividing the dataset according to the used mining algorithm.
+## here we used the attributes as  features and this is another limitation of the model, doing more research and observation may enable us to extract best features that give more accurate results,
+## we can study the effect of each sub-group of features and choose the best one that gives the higest results, but no time available for this
+## another limitation of the model: must apply the most used classification methods and compare which is the best results
+and studing the cost of each algorithms especially if we have huge daset.
+## the code need ome more reading to delete unused libraries,but still the time limitations
+***************************************************
+To Non-technical audiences
+Introduction
+The main Five steps for general data analysis model contains: Data-Collection, Data Pre-processing, Feature Extracting, Mining Algorithm, and lastly, Result Evaluation. In the first step; we use the available "annotated" dataset from the related works. Our work in this model can summarized from the fthird step to the fifth step.  
+ 
+Data Set
+It is important that an appropriate amount of data be collected for the training and testing of the model, the dataset contains 569 records, with 32 attributes, 
+
+we will devide the dataset to tesing and training sets , lots of approaches comes to choose the best way to divide the dataset, the general one to choose 50% for training and 50% for testing, but sence we only have small dataset we will divide by 70% to 30%.
+
+one of the attributes we will compare our results with it "diagnosis" which contains B    357
+M    212
+to divide the dataset we have to see the annotation field "diagnosis", what are the classification values, 
+and the we can divide the date according each numbers contained in that values
+
+Data Preprocessing
+During this step, the raw data will be transformed into a suitable format for the next processing steps. 
+## sence we have numeric data we can use them immediately
+## the "diagnosis" contains M and N which we can replace by true or false, in vectors we must use numbers, so we will transform to "0", "1"
+
+Feature Extraction and Selection
+Feature Definition
+“A Feature is an individual measurable property or characteristic of a phenomenon being observed” [6 In order to input data into a classifier, it must be formed as a vector, which contains many features that provide enough information to make the classification process accurate. 
+
+
+ Mining Algorithm
+In this step, the feature vectors will be used as an input to one of the mining algorithms such that the class of the data may be predicted. We used two of the most effective classefication method that are approperiate to the spesefications of our dataset.
+
+Evaluation
+In this Step, known evaluation measures of accuracy, precision, recall, and F-measure are used to evaluate the performance of the proposed techniques. the model  was able to predect more than 95% of the cases in one of the used Algorithms. 
+so just we provide the record of the breast photo to the classefier, and it will give the results in high accuracy.
+
+ The factors that contributed to malignant vs benign tumor identification.
+We used two modela, and each one gave us a group of effective factors to distinguish between malignant vs benign tumor
+For the random forest model, concave_points_sd_error, concave_points_worst, and concavity_worst were the three most imporant predictors. For the logistic model, concavity_worst, concave_points_sd_error and fractal_dimension_mean were the top predictors. 
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+Part II
+Student 1
+Code
+it is better to import all libraries on the top, to check later if you have all the dependencies you need and avoid importing the same library many times.
+Adding the two following libraries to improve the solution and to let it work on the newest versions
+
+    from sklearn.linear_model import LinearRegression
+
+    from sklearn.model_selection import cross_val_score
+ambiguous variables' names x1, x2,d are confusing variable name - better to use meaningful names like data instead of d
+
+Methodology / Conceptual understanding
+depending on only one attributes x1 to predict x2 "the salary" ignoring the effect of other columns from the dataset. also, he can make calculations to add new attributes that may raise the accuracy of the model
+
+A ten-fold cross-validation is applied to obtain a fair measurement of performance. Cross-validation is a procedure that evaluates the ML models with a limited dataset. This procedure randomly divides the sample set into an approximately equal size of “k” groups or folds. The first group is considered to be a testing set, while the other “k-1” remaining groups are used to train the classifier. This will be repeated for “k” iterations until all groups are used as a testing set. There is no formal rule for choosing the value of “k,” but it is usually 5 or 10. As “k” gets larger, this cross-validation technique reduces the bias (difference between expected and estimated values): “In practice, 10 have been found a reasonable estimate of error rate”.
+
+
+Student 2
+Code
+Adding the  following libraries to improve the solution and to let it work on the newest versions
+     from sklearn.model_selection import cross_val_score
+Also the variables name are confusing, like using "data".
+
+Methodology / Conceptual Understanding
+
+depending on only one attributes ContractType to predict  "the salary" ignoring the effect of other columns from the dataset. also, he can make calculations to add new attributes that may raise the accuracy of the model, andy studying the realistic of the effect of each attribute on the predection for example, wouldn't want to use Salary to predict SalaryNormalized since SalaryNormalized is a transformed version of Salary.
+
+Results:  Using the visualization of the work to explain how"for example, "SalaryNormalized (or maybe Salary) differ by Contract Type using boxplot to show that, or output the coefficient from the regression.
+
+
+
+The optimal hyperparameters are chosen using CCross-validation. and after getting the optimal hyperparameter, you should run it on the full training data (no folds) to produce a final model. the student used the linear regression method and it has no hyperparameters to tune. it is better to use sklearn.linear_model.Ridge or sklearn.linear_model.ElasticNet. 
+Use GridSearchCV to select the optimal hyperparameters.
